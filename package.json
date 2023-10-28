@@ -1,12 +1,23 @@
 {
-  "name": "be-redis-chat",
+  "name": "exam1server",
   "version": "1.0.0",
-  "description": "<h2>Introduction</h2> <p align=center>     <img src=\"assets/dataflow.jpeg\" width=\"65%\" height=\"65%\">                DataFlow </p>",
+  "description": "mridul",
   "main": "index.js",
   "scripts": {
-    "start": "docker compose up"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "se": "node server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "redis-up": "docker compose up",
+    "redis-down": "docker compose down"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.2",
+    "nodemon": "^2.0.22",
+    "redis": "^4.6.7"
+  }
 }
