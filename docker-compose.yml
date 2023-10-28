@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  exam1:
+    build: ./exam1
+    container_name: exam1_c
+    ports:
+      - '3001:3001'
+    volumes:
+      - './exam1:/app'
+      - '/app/node_modules'
+    networks:
+      - mynetwork
+    depends_on:
+      - redis
+      - exam1server
+    stdin_open: true
+    tty: true
+  exam1server:
+    build: ./exam1server
+    container_name: exam1server_c
+    ports:
+      - '3000:3000'
+    volumes:
+      - './exam1server:/app'
+    networks:
+      - mynetwork
+    depends_on:
+      - redis
+  redis:
+    container_name: redis-service
+    image: 'redis:latest'
+    restart: always
+    command: redis-server --save
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge

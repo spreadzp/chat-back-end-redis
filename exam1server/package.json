@@ -1,0 +1,23 @@
+{
+  "name": "exam1server",
+  "version": "1.0.0",
+  "description": "mridul",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "se": "node server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "redis-up": "docker compose up",
+    "redis-down": "docker compose down"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.2",
+    "nodemon": "^2.0.22",
+    "redis": "^4.6.7"
+  }
+}
