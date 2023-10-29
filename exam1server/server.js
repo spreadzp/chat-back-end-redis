@@ -15,7 +15,7 @@ let client;
   client = redis.createClient({
     socket: {
       port: 6379,
-      host: "redis-server",
+      host: "redis-service",
     },
   });
   client.on("error", (error) => console.error(`Error : ${error}`));

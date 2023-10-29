@@ -19,8 +19,8 @@ EXPOSE 6379
 COPY . ./
 
 # this port are using to run expess application
-EXPOSE 3000
+# EXPOSE 3000
 
 # this run time
-CMD [ "node","server.js","npm","start","dev"]
+CMD ["npm", "run", "start"]
 

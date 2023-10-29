@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const UserData = require("./model/infomodel");
 const Message = require("./model/messages");
 const redis = require("redis");
-const PORT = process.env.POTRT || 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(cors());
@@ -15,7 +15,7 @@ let client;
   client = redis.createClient({
     socket: {
       port: 6379,
-      host: "redis-service",
+      host: process.env.REDIS_HOST || "redis-service",
     },
   });
   client.on("error", (error) => console.error(`Error : ${error}`));
