@@ -23,7 +23,10 @@ jobs:
            
       - name: Build docker image
         run: |
-          docker build -f frontend/Dockerfile -t ${{ env.name }}:${{ env.stamp }} .
+          pwd
+          cd frontend/
+          pwd
+          docker build -t ${{ env.name }}:${{ env.stamp }} .
           
       - name: Save docker image
         run: |
