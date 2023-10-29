@@ -18,5 +18,5 @@ COPY . ./
 EXPOSE 3000
 
 # this run time
-CMD [ "npm","start","dev" ]
+CMD [ "npm","start" ]
 
