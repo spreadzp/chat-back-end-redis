@@ -5,21 +5,20 @@ services:
     container_name: frontend
     ports:
       - '3001:3001'
-    volumes:
-      - './exam1:/app'
-      - '/app/node_modules'
+    env_file:
+      - frontend.env  
     networks:
       - mynetwork
     depends_on:
       - redis
-      - exam1server 
-  exam1server:
-    build: ./exam1server
-    container_name: exam1server_c
+      - backend 
+  backend:
+    image: paul-backend:latest
+    container_name: backend
     ports:
-      - '3000:3000'
-    volumes:
-      - './exam1server:/app'
+      - '3000:3000'   
+    env_file:
+      - backend.env  
     networks:
       - mynetwork
     depends_on:
