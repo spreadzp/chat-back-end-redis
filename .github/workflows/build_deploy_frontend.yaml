@@ -22,10 +22,8 @@ jobs:
         uses: actions/checkout@v3
            
       - name: Build docker image
-        run: |
-          pwd
-          cd frontend/
-          pwd
+        run: | 
+          cd frontend/ 
           docker build -t ${{ env.name }}:${{ env.stamp }} .
           
       - name: Save docker image
@@ -42,6 +40,4 @@ jobs:
         run: |
           ssh -i ${key} -o "StrictHostKeyChecking no" ${{ vars.EC2_HOST }} ' \
           sudo docker load -i '${{ env.name }}'.tar && \ 
-          sudo docker compose -f example/docker-compose.yml up -d; \
-          sudo docker rmi $(sudo docker images -q); \
-          rm '${{ env.name }}'.tar'
+          sudo docker compose -f example/docker-compose.yml up -d'
