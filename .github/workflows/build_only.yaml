@@ -1,0 +1,26 @@
+name: Backend build check
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:   
+      - dev
+      - master
+    paths-ignore:
+      - '.github/workflows/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      name: ${GITHUB_REPOSITORY#*/}"-dev"
+      key: "ssh_key"
+      stamp: ${GITHUB_SHA} 
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+           
+      - name: Build docker image
+        run: |
+          docker build . -t ${{ env.name }}:${{ env.stamp }}
