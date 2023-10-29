@@ -18,5 +18,5 @@ COPY . ./
 EXPOSE 3000
 
 # this run time
-CMD [ "node","server.js","npm","start","dev","redis-server" ]
+CMD [ "npm","start","dev" ]
 
