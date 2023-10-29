@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const UserData = require("./model/infomodel");
 const Message = require("./model/messages");
 const redis = require("redis");
+require('dotenv').config()
 const PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -15,7 +16,7 @@ let client;
   client = redis.createClient({
     socket: {
       port: 6379,
-      host: process.env.REDIS_HOST || "redis-service",
+      host: process.env.REDIS_HOST || "redis",
     },
   });
   client.on("error", (error) => console.error(`Error : ${error}`));

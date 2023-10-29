@@ -1,26 +1,24 @@
-# which node version we want to use
-FROM node:20
+# Use the official Node.js image as the base
+FROM node:14
 
-# set the work directory
+# Set the working directory for your application
 WORKDIR /app
 
-# copy the package jason and install dependencies
-COPY package.json .
-COPY package-lock.json .
+# Copy package.json and package-lock.json to the image
+COPY package*.json ./
 
-# this work in buid time
+# Install application dependencies
 RUN npm install
 
+# Install Redis server
 RUN apt-get update && apt-get install -y redis-server
 
+# Copy your application source code to the image
+COPY . .
+
+# Expose the ports for your application and Redis
+EXPOSE 3000
 EXPOSE 6379
 
-# copy rest of the file 
-COPY . ./
-
-# this port are using to run expess application
-# EXPOSE 3000
-
-# this run time
-CMD ["npm", "run", "start"]
-
+# Command to run both your application and Redis
+CMD [ "npm", "start" ]

@@ -11,12 +11,14 @@
     "redis-up": "docker compose up",
     "redis-down": "docker compose down",
     "sh-start": "chmod +x start.sh ",
-    "run-sh": "npm run sh-start && ./start.sh "
+    "run-sh": "npm run sh-start && ./start.sh ",
+    "build": "npm build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongoose": "^7.2.2",
     "nodemon": "^2.0.22",
