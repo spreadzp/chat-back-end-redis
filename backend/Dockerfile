@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # this work in buid time
-RUN npm ci
+RUN npm install
 
 FROM node:20-alpine3.18 AS runner
 # copy rest of the file 
