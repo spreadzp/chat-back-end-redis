@@ -1,5 +1,5 @@
 # which node version we want to use
-FROM node:20-alpine3.18 AS dependencies
+FROM node:18.18.2-alpine3.18 AS dependencies
 
 # set the work directory
 WORKDIR /app
@@ -8,9 +8,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # this work in buid time
-RUN npm install
+RUN npm ci
 
-FROM node:20-alpine3.18 AS runner
+FROM node:18.18.2-alpine3.18 AS runner
 # copy rest of the file 
 COPY . ./
 COPY --from=dependencies /app/node_modules ./node_modules 
@@ -20,4 +20,3 @@ EXPOSE 3000
 
 # this run time
 CMD [ "npm","start" ]
-
