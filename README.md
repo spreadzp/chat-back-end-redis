@@ -31,7 +31,7 @@ Following is a demonstration of the system:
 ## Installation
 ```console
 cd react-express-redis-docker-architecture
-docker-compose up
+docker compose up
 ```
 ## to stop
 ```console
