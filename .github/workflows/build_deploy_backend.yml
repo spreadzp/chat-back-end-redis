@@ -40,5 +40,6 @@ jobs:
         run: |
           ssh -i ${key} -o "StrictHostKeyChecking no" ${{ vars.EC2_HOST }} ' \
           sudo docker load -i '${{ env.name }}'.tar && \ 
-          sudo docker compose -f example/docker-compose.yml up -d'
+          sudo docker compose -f example/docker-compose.yml up -d; \
+          sudo docker rmi $(sudo docker images -q) || true'
           
