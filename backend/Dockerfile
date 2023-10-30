@@ -1,18 +1,19 @@
 # which node version we want to use
-FROM node:20
+FROM node:20-alpine3.18 AS dependencies
 
 # set the work directory
 WORKDIR /app
 
 # copy the package jason and install dependencies
-COPY package.json .
-COPY package-lock.json .
+COPY package*.json ./
 
 # this work in buid time
-RUN npm install
+RUN npm ci
 
+FROM node:20-alpine3.18 AS runner
 # copy rest of the file 
 COPY . ./
+COPY --from=dependencies /app/node_modules ./node_modules 
 
 # this port are using to run expess application
 EXPOSE 3000
