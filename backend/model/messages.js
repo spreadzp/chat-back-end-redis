@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
-const messageSchema = new mongoose.Schema({
-  // Dynamic field names for chat IDs
+const messageSchema = new mongoose.Schema({ 
   chatId: {
-    type: Map, // Use Map to store dynamic keys
+    type: Map, 
     of: [
       {
         message: String,
         timestampMessage: Number,
         clientId: String,
+        address: String,
+        publicKey: String,
       },
     ],
   },

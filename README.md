@@ -27,7 +27,7 @@ Following is a demonstration of the system:
 <p align=center>
     <img src="assets/outputshow.gif" width="65%" height="65%">
 </p>
-
+http://107.23.141.215/api
 ## Installation
 ```console
 cd react-express-redis-docker-architecture
