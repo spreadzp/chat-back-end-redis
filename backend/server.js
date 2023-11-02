@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const UserData = require("./model/infomodel");
 const Message = require("./model/messages");
 const redis = require("redis");
-const PORT = process.env.POTRT || 3000;
+require("dotenv").config();
+const PORT = process.env.PORT || 3000;
+const redisUrl = process.env.REDIS_URL; 
 
 const app = express();
 app.use(cors());
@@ -14,8 +16,7 @@ let client;
 (async () => {
   client = redis.createClient({
     socket: {
-      port: 6379,
-      host: "redis-service",
+      url: redisUrl,
     },
   });
   client.on("error", (error) => console.error(`Error : ${error}`));
@@ -146,7 +147,7 @@ app.get("/message/:chatId", checkCacheMessages, getAllMessages);
 
 mongoose
   .connect(
-    "mongodb+srv://mridul:mridul1290@cluster0.nqmjboq.mongodb.net/node-api?retryWrites=true&w=majority"
+    process.env.MONGO_URL
   )
   .then((e) => {
     console.log("Connected  mongo database");
