@@ -4,10 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: 
-      
-main
-  paths-ignore:
-'.github/workflows/**'
+      - main
+    paths-ignore:
+      - '.github/workflows/**'
 
 jobs:
   build:
@@ -21,20 +20,20 @@ jobs:
       stamp: ${GITHUB_SHA}
       host: ${{ secrets.ORACLE_USER }}"@"${{ secrets.ORACLE_IP }}
       ghcr_user: $(echo ${{ github.repository_owner }} | tr '[A-Z]' '[a-z]')
-
+    
     steps:
-      
-name: Checkout code
-      uses: actions/checkout@v4
-name: Build docker image
-run: |
-  docker build . -t ${{ env.name }}:${{ env.stamp }}
-  docker tag ${{ env.name }}:${{ env.stamp }} ${{ env.name }}:latest
+      - name: Checkout code
+        uses: actions/checkout@v4
+           
+      - name: Build docker image
+        run: |
+          docker build . -t ${{ env.name }}:${{ env.stamp }}
+          docker tag ${{ env.name }}:${{ env.stamp }} ${{ env.name }}:latest
 
-      
-name: Log in to registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-name: Push image
-run: |
-  docker push ${{ env.name }}:latest
-  docker push ${{ env.name }}:${{ env.stamp }}
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+        
+      - name: Push image
+        run: |
+          docker push ${{ env.name }}:latest
+          docker push ${{ env.name }}:${{ env.stamp }}
