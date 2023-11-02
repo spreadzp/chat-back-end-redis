@@ -1,0 +1,37 @@
+name: Deploy to Render
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - main
+    paths-ignore:
+      - '.github/workflows/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
+    env:
+      name: ghcr.io/spreadzp/chat-back-end-redis
+      stamp: ${GITHUB_SHA}
+      ghcr_user: $(echo ${{ github.repository_owner }} | tr '[A-Z]' '[a-z]')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+           
+      - name: Build docker image
+        run: |
+          docker build . -t ${{ env.name }}:${{ env.stamp }}
+          docker tag ${{ env.name }}:${{ env.stamp }} ${{ env.name }}:latest
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+        
+      - name: Push image
+        run: |
+          docker push ${{ env.name }}:latest
+          docker push ${{ env.name }}:${{ env.stamp }}
