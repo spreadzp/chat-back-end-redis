@@ -7,6 +7,7 @@ const redis = require("redis");
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const redisUrl = process.env.REDIS_URL; 
+console.log("🚀 ~ file: server.js:10 ~ redisUrl:", redisUrl)
 
 const app = express();
 app.use(cors());
